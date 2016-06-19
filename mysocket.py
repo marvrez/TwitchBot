@@ -3,7 +3,7 @@ from settings import HOST, PORT, PASS, NICK, CHANNEL
 
 
 def openSocket():
-    s = socket.socket()
+    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
     s.connect((HOST,PORT))
     
     s.send( ("PASS " + PASS + "\r\n").encode() )
@@ -13,5 +13,5 @@ def openSocket():
 
 def sendMessage(s, message):
     messageTemp = "PRIVMSG #" + CHANNEL + " :" + message
-    s.send(messageTemp + "\r\n")
+    s.send((messageTemp + "\r\n").encode())
     print("Sent: " + messageTemp)
