@@ -1,6 +1,7 @@
 from mysocket import openSocket, sendMessage
 from initialize import joinRoom
-from settings import ADMIN
+from settings import ADMIN, LOL_API
+from leaguerank import get_summoner_league
 import read
 s = openSocket()
 joinRoom(s)
@@ -22,10 +23,11 @@ while True:
 ############### COMMANDS ############################ 
 
 		#Get local time
-        if "!time" in line:
-           sendMessage(s,read.get_time()) 
+        if "!time".lower() in line:
+            sendMessage(s,read.get_time()) 
 		#Get temperature of given city
-        if "!temp" in line:
-           sendMessage(s,read.get_temp(msg))
-        if "!end" in line and user == ADMIN:
-            test = True #steng bot dersom !end brukes
+        if "!temp".lower() in line:
+            sendMessage(s,read.get_temp(msg))
+        if "!rank".lower() in line:
+            LeagueRank = get_summoner_league(LOL_API)
+            sendMessage(s,LeagueRank.getLeagueRank(msg))

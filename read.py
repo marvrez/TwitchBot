@@ -24,7 +24,7 @@ def get_time():
    return  "The current time is: " + strftime("%H:%M:%S") +" KKona"
 
 def get_temp(line):
-    if not " " in line:
+    if len(line.split()) <= 1: 
         city = "Oslo"
     else: city = line.split()[1]
     owm = pyowm.OWM("b217f6716e88062baafd714981051139")
